@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Legend Studios</title>
+<style>
+  :root {
+    --bg1:#6dd5ed;
+    --bg2:#2193b0;
+    --panel:#ffffffee;
+    --accent:#1e88e5;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;padding:30px;
+    font-family:Inter,system-ui,Segoe UI,Roboto;
+    background:radial-gradient(circle at var(--x,50%) var(--y,50%),var(--bg1),var(--bg2));
+    color:#222;transition:background .12s linear;
+  }
+  header{
+    display:flex;justify-content:space-between;align-items:center;
+    color:#fff;font-weight:700;font-size:1.1rem;
+  }
+  a{color:#fff;text-decoration:none;font-weight:600;transition:opacity .2s}
+  a:hover{opacity:0.8;}
+  main{
+    background:var(--panel);
+    border-radius:16px;
+    padding:40px;
+    max-width:950px;
+    margin:60px auto;
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
+    text-align:center;
+    animation:fadeUp .7s ease both;
+  }
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(25px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  h2{margin-top:0;color:#1e293b;font-size:1.8rem;}
+  .subtitle{color:#475569;margin-bottom:25px;}
+  .game-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:22px;
+  }
+  .game{
+    background:#f9fafc;
+    border-radius:14px;
+    padding:16px;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    position:relative;overflow:hidden;
+  }
+  .game:hover{
+    transform:scale(1.06);
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    filter:brightness(1.05);
+  }
+  .game img{
+    width:100%;height:130px;object-fit:cover;
+    border-radius:10px;margin-bottom:10px;
+  }
+  .game h3{margin:6px 0;font-size:1.1rem;color:#0f172a;}
+  .genre{color:#2193b0;font-weight:600;margin-bottom:5px;}
+  .release{font-size:0.85rem;color:#64748b;}
+</style>
+</head>
+<body>
+<header>
+  <div>🎮 Legend Studios</div>
+  <a href="Home.html">🏠 Home</a>
+</header>
+
+<main>
+  <h2>🔥 Featured Game Library</h2>
+  <p class="subtitle">Explore our most loved creations — click a game to view its world, details, and release info.</p>
+
+  <div class="game-grid" id="gameGrid"></div>
+</main>
+
+<script>
+  // Background motion
+  document.body.addEventListener('mousemove', e=>{
+    const x=(e.clientX/window.innerWidth)*100;
+    const y=(e.clientY/window.innerHeight)*100;
+    document.body.style.setProperty('--x',`${x}%`);
+    document.body.style.setProperty('--y',`${y}%`);
+  });
+
+  // Games data
+  const games = [
+    {
+      name:'Crystal Legends',
+      genre:'Adventure / RPG',
+      img:'https://i.imgur.com/RkVbzvF.jpeg',
+      desc:'Embark on a crystal-powered journey through mystical lands and uncover lost secrets.',
+      rating:'4.8 / 5',
+      release:'Jan 15, 2025',
+      trailer:'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+    },
+    {
+      name:'Cyber Racer X',
+      genre:'Racing / Futuristic',
+      img:'https://i.imgur.com/XvqL6vI.jpeg',
+      desc:'Race through neon-lit tracks at light speed. Customize your hovercar and dominate leaderboards.',
+      rating:'4.6 / 5',
+      release:'Aug 10, 2024',
+      trailer:'https://www.youtube.com/watch?v=2vjPBrBU-TM'
+    },
+    {
+      name:'Pixel Survivors',
+      genre:'Retro / Survival',
+      img:'https://i.imgur.com/BtB7F5v.jpeg',
+      desc:'Survive the night in an endless pixel apocalypse with craftable weapons and base building.',
+      rating:'4.4 / 5',
+      release:'May 9, 2024',
+      trailer:'https://www.youtube.com/watch?v=ftlvreFtA2A'
+    },
+    {
+      name:'BattleZone Royale',
+      genre:'FPS / Online',
+      img:'https://i.imgur.com/5uWFX8q.jpeg',
+      desc:'Drop in, gear up, and fight to be the last legend standing in this intense online shooter.',
+      rating:'4.7 / 5',
+      release:'Sep 3, 2025',
+      trailer:'https://www.youtube.com/watch?v=8ZcmTl_1ER8'
+    },
+    {
+      name:'Sky Builders',
+      genre:'Creative / Sandbox',
+      img:'https://i.imgur.com/NLwM6FI.jpeg',
+      desc:'Build cities in the sky! Craft, trade, and explore floating worlds with friends.',
+      rating:'4.5 / 5',
+      release:'Dec 21, 2024',
+      trailer:'https://www.youtube.com/watch?v=ScMzIvxBSi4'
+    }
+  ];
+
+  // Render games
+  const grid=document.getElementById('gameGrid');
+  games.forEach(g=>{
+    const el=document.createElement('div');
+    el.className='game';
+    el.innerHTML=`
+      <img src="${g.img}" alt="${g.name}">
+      <h3>${g.name}</h3>
+      <div class="genre">${g.genre}</div>
+      <div class="release">📅 ${g.release}</div>
+    `;
+    el.onclick=()=>{
+      localStorage.setItem('selectedGame', JSON.stringify(g));
+      window.location.href='GameDetails.html';
+    };
+    grid.appendChild(el);
+  });
+</script>
+</body>
+</html>

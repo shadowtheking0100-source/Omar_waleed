@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Legend Studios</title>
+<style>
+  :root {
+    --bg1: #6dd5ed;
+    --bg2: #2193b0;
+    --panel: #ffffffee;
+  }
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Inter, system-ui, Segoe UI, Roboto, sans-serif;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), var(--bg1), var(--bg2));
+    transition: background .12s linear;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-weight: 700;
+    padding: 25px 30px;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity .2s ease;
+  }
+  a:hover { opacity: 0.8; }
+
+  main {
+    background: var(--panel);
+    border-radius: 16px;
+    padding: 32px 28px;
+    width: 90%;
+    max-width: 650px;
+    margin: auto;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    text-align: left;
+    backdrop-filter: blur(6px);
+    animation: fadeIn 0.6s ease;
+  }
+
+  h2 {
+    margin-top: 0;
+    color: #1e293b;
+    text-align: center;
+  }
+
+  p {
+    line-height: 1.7;
+    color: #334155;
+    font-size: 0.97rem;
+    margin-bottom: 1rem;
+  }
+
+  footer {
+    text-align: center;
+    color: #f1f5f9;
+    font-size: 0.85rem;
+    padding: 20px;
+    opacity: 0.85;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div>Legend Studios</div>
+  <a href="Home.html">🏠 Home</a>
+</header>
+
+<main>
+  <h2>Privacy Policy</h2>
+  <p>At <strong>Legend Studios</strong>, your privacy matters. We only collect data that helps enhance your experience — such as your saved preferences and game progress.</p>
+  <p>We do <strong>not</strong> share your personal information with third parties. You can clear all your data anytime by logging out or deleting your account.</p>
+  <p>If you have any questions or concerns, please reach out through our <a href="#" style="color:#2193b0;text-decoration:underline;">Help Center</a>.</p>
+</main>
+
+<footer>
+  © 2025 Legend Studios — All rights reserved.
+</footer>
+
+<script>
+document.body.addEventListener('mousemove', e => {
+  const x = (e.clientX / window.innerWidth) * 100;
+  const y = (e.clientY / window.innerHeight) * 100;
+  document.body.style.setProperty('--x', `${x}%`);
+  document.body.style.setProperty('--y', `${y}%`);
+});
+</script>
+</body>
+</html>

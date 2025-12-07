@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Legend Studios</title>
+<style>
+  :root {
+    --bg1: #6dd5ed;
+    --bg2: #2193b0;
+    --panel: #ffffffee;
+    --muted: #f0f6fb;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+  }
+
+  body {
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), var(--bg1), var(--bg2));
+    transition: background .12s linear;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .brand {
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: .6px;
+  }
+
+  .nav {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    position: relative;
+  }
+
+  .btn {
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background .2s;
+  }
+
+  .btn:hover { background: rgba(255, 255, 255, 0.25); }
+
+  /* Dropdown styling */
+  .dropdown { position: relative; display: inline-block; }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: rgba(255, 255, 255, 0.97);
+    min-width: 160px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    overflow: hidden;
+  }
+  .dropdown-content a {
+    display: block;
+    padding: 10px 12px;
+    color: #1e293b;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .dropdown-content a:hover { background: #e2e8f0; }
+  .dropdown:hover .dropdown-content {
+    display: block;
+    animation: fadeIn .2s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  main {
+    max-width: 1100px;
+    margin: 36px auto 0;
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .card {
+    background: var(--panel);
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 8px 26px rgba(2, 6, 23, 0.12);
+    min-width: 260px;
+    flex: 1;
+    animation: fadeIn .4s ease;
+  }
+
+  .boxes {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    justify-content: center;
+  }
+
+  .box {
+    width: 150px;
+    height: 150px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    text-decoration: none;
+    color: #222;
+    background: linear-gradient(135deg, #f6d365, #fda085);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .box:hover {
+    transform: scale(1.08);
+    box-shadow: 0 12px 26px rgba(0,0,0,0.2);
+  }
+
+  .mini-game {
+    position: fixed;
+    bottom: 18px;
+    left: 18px;
+    background: linear-gradient(90deg, #ff6b6b, #feca57);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 28px;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+    transition: transform .2s;
+  }
+  .mini-game:hover { transform: scale(1.1); }
+
+  /* Info button — opposite side of mini-game */
+.info {
+  position: fixed;
+  bottom: 18px;
+  right: 18px; /* moved to opposite side */
+  background: linear-gradient(90deg, #00b4db, #00b084); /* noticeable blue gradient */
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 28px;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+  transition: transform .2s, box-shadow .2s;
+}
+
+.info:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+  background: linear-gradient(90deg, #00b084, #00b4db);
+}
+
+
+  footer {
+    text-align: center;
+    color: #e2f5ff;
+    margin-top: 40px;
+    font-size: .9rem;
+  }
+
+  @media (max-width:800px) {
+    header { flex-direction: column; align-items: flex-start; gap: 10px; }
+    main { padding: 0 8px; }
+  }
+
+  .account-summary {
+    font-size: .95rem;
+    color: #334155;
+    line-height: 1.6;
+  }
+
+  .highlight {
+    background: #e0f2fe;
+    border-radius: 6px;
+    padding: 4px 6px;
+    color: #0369a1;
+    font-weight: 600;
+  }
+
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Legend Studios</div>
+  <nav class="nav" aria-label="Main">
+    <div id="welcome" style="color:#fff;font-weight:600">Welcome</div>
+
+    <div class="dropdown">
+      <button class="btn">⚙️ Settings</button>
+      <div class="dropdown-content">
+        <a href="profile.html">👤 Profile</a>
+        <a href="preferences.html">🎨 Preferences</a>
+        <a href="privacy.html">🔒 Privacy</a>
+        <a href="help.html">❓ Help Center</a>
+      </div>
+    </div>
+    <a href="file:///E:/omar%20win/html%20and%20css%20files/legend.co/Log_in.html">
+    <button id="logout" class="btn">🚪 Logout</button>
+    </a>
+  </nav>
+</header>
+
+<main>
+  <!-- Welcome Section -->
+  <section class="card">
+    <h2>Welcome to Legend Studios</h2>
+    <p class="muted">Explore our sections below and discover everything our studio offers!</p>
+
+    <div class="boxes">
+      <a class="box" href="GameLibraries.html">🎮 Games library</a>
+      <a class="box" href="shop.html">🛒 Shop</a>
+      <a class="box" href="join.html">🧑‍💻 Our socials</a>
+      <a class="box" href="about.html">ℹ️ Dev info</a>
+      <a class="box" href="community.html">💬 Community</a>
+      <a class="box" href="events.html">🎉 Events</a>
+      <a class="box" href="news.html">📰 News</a>
+      <a class="box" href="support.html">🧩 Support</a>
+      <a class="box" href="contact.html">📧 Contact</a>
+    </div>
+  </section>
+
+  <!-- Account Section -->
+  <section class="card" id="accountCard">
+    <h3>Make an account</h3>
+    <div id="accountInfo" class="account-summary">
+      Loading your account...
+    </div>
+    <div style="margin-top:12px">
+      <a class="btn" id="toLogin" href="login.html">Log in</a>
+      <a class="btn" id="toSignup" href="signup.html" style="margin-left:8px">Sign up</a>
+    </div>
+  </section>
+</main>
+
+<a class="mini-game" href="mini game.html">🎯 Play Mini Game</a>
+<a class="info" href="info.html">ℹ️ Info</a>
+
+
+<footer>© 2025 Legend Studios — All Rights Reserved</footer>
+
+<script>
+document.body.addEventListener('mousemove', e => {
+  const x = (e.clientX / window.innerWidth) * 100;
+  const y = (e.clientY / window.innerHeight) * 100;
+  document.body.style.setProperty('--x', `${x}%`);
+  document.body.style.setProperty('--y', `${y}%`);
+});
+
+const welcome = document.getElementById('welcome');
+const accountInfo = document.getElementById('accountInfo');
+const logout = document.getElementById('logout');
+const toLogin = document.getElementById('toLogin');
+const toSignup = document.getElementById('toSignup');
+
+function renderSession() {
+  const sessionRaw = localStorage.getItem('legendSession');
+  const userRaw = localStorage.getItem('legendUser');
+
+  if (sessionRaw && userRaw) {
+    try {
+      const user = JSON.parse(userRaw);
+      const username = user.email.split('@')[0];
+      welcome.textContent = `Hi, ${username}!`;
+
+      accountInfo.innerHTML = `
+        <p><strong>${user.email}</strong></p>
+        <p>Account created on: <span class="highlight">${new Date(user.created).toLocaleDateString()}</span></p>
+        <p>You are currently logged in as a valued member of <strong>Legend Studios</strong>.</p>
+      `;
+
+      toLogin.style.display = 'none';
+      toSignup.style.display = 'none';
+    } catch (e) {
+      console.error(e);
+    }
+  } else {
+    welcome.textContent = 'Welcome';
+    accountInfo.innerHTML = `
+      <p>Welcome to <strong>Legend Studios</strong>! You can log in or sign up to get access to:</p>
+      <ul style="margin-top:6px; padding-left:18px; color:#475569;">
+        <li>Chat with out community</li>
+        <li>Customize your profile</li>
+        <li>Join exclusive events</li>
+        <li>Buy limited time offers</li>
+      </ul>
+    `;
+    toLogin.style.display = '';
+    toSignup.style.display = '';
+  }
+}
+
+logout.addEventListener('click', () => {
+  localStorage.removeItem('legendSession');
+  renderSession();
+  logout.textContent = '✅ Logged out';
+  setTimeout(() => logout.textContent = '🚪 Logout', 900);
+});
+
+renderSession();
+</script>
+</body>
+</html>

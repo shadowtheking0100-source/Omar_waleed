@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Legend Studios</title>
+<style>
+  :root {
+    --bg1:#6dd5ed;
+    --bg2:#2193b0;
+    --panel:#ffffffee;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    height:100vh;
+    padding:30px;
+    font-family:Inter,system-ui,Segoe UI,Roboto;
+    background:radial-gradient(circle at var(--x,50%) var(--y,50%),var(--bg1),var(--bg2));
+    transition:background .12s linear;
+    color:#222;
+  }
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:#fff;
+    font-weight:700;
+  }
+  a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+  }
+  main{
+    background:var(--panel);
+    border-radius:16px;
+    padding:32px;
+    max-width:850px;
+    margin:60px auto;
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
+  }
+  h2{margin-top:0;color:#1e293b;text-align:center;}
+  .post{
+    background:#f8fafc;
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:18px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.08);
+    transition:transform 0.15s ease, box-shadow 0.2s ease;
+  }
+  .post:hover{transform:scale(1.02);box-shadow:0 10px 25px rgba(0,0,0,0.12);}
+  .post-header{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+  .avatar{width:50px;height:50px;border-radius:50%;object-fit:cover;border:3px solid #2193b0;}
+  .author{font-weight:700;color:#1e293b;display:flex;align-items:center;gap:8px;}
+  .dev-badge{
+    background:linear-gradient(90deg,#00b4db,#2193b0);
+    color:white;
+    font-size:0.75rem;
+    font-weight:700;
+    padding:3px 8px;
+    border-radius:6px;
+    letter-spacing:0.5px;
+    text-shadow:0 0 4px rgba(255,255,255,0.7);
+  }
+  .time{font-size:0.85rem;color:#64748b;}
+  .post-content{color:#334155;line-height:1.5;margin-top:6px;}
+  .reactions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:12px;
+  }
+  .reaction{
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:20px;
+    padding:6px 12px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    cursor:pointer;
+    font-size:1rem;
+    transition:transform .2s;
+    box-shadow:0 2px 6px rgba(0,0,0,0.05);
+  }
+  .reaction:hover{transform:scale(1.15);}
+  .comment-input{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+  }
+  .comment-input input{
+    flex:1;
+    padding:8px;
+    border-radius:8px;
+    border:1px solid #cbd5e1;
+  }
+  .comment-input button{
+    background:#2193b0;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:8px 12px;
+    cursor:pointer;
+    font-weight:600;
+  }
+  .comments{
+    margin-top:15px;
+    padding-top:10px;
+    border-top:1px solid #e2e8f0;
+  }
+  .comment{
+    background:#fff;
+    border-radius:8px;
+    padding:8px 10px;
+    margin-top:10px;
+    color:#334155;
+    box-shadow:0 3px 8px rgba(0,0,0,0.05);
+  }
+  footer{text-align:center;color:#e2f5ff;margin-top:40px;font-size:.9rem;}
+</style>
+</head>
+<body>
+<header>
+  <div>Legend Studios</div>
+  <a href="Home.html">🏠 Home</a>
+</header>
+
+<main>
+  <h2>💬 Community</h2>
+  <p style="text-align:center;color:#475569;margin-bottom:30px">
+    Welcome to the Legend Community! React, share, and motivate the devs 💪
+  </p>
+  <div id="posts"></div>
+</main>
+
+<footer>© 2025 Legend Studios — Community Zone</footer>
+
+<script>
+document.body.addEventListener('mousemove', e=>{
+  const x=(e.clientX/window.innerWidth)*100;
+  const y=(e.clientY/window.innerHeight)*100;
+  document.body.style.setProperty('--x',`${x}%`);
+  document.body.style.setProperty('--y',`${y}%`);
+});
+
+const emojis = ['👍','🔥','😂','😢','❤️','😡','🤯','👏','💀','⭐'];
+const posts = [
+  {user:'ShadowTheKing',avatar:'https://i.imgur.com/0y0y0yC.png',time:'2h ago',content:'Our first high quality game will be released soon! Be ready!!!',dev:true},
+  {user:'PixelHero',avatar:'https://i.imgur.com/NbRnW84.png',time:'5h ago',content:'Legend Studios is the best studio ever ⚔️'},
+  {user:'NovaStar',avatar:'https://i.imgur.com/n9Yb4sE.png',time:'1d ago',content:'Shoutout to the devs—they’re making something epic! 🚀'},
+  {user:'LunaDev',avatar:'https://i.imgur.com/zQKyzsQ.png',time:'3d ago',content:'Keep pushing team! Every bug fixed is a victory! 🧠'},
+  {user:'Skyline',avatar:'https://i.imgur.com/UfQ4RlK.png',time:'4d ago',content:'Hype for the next update! Let’s go legends ⚡'}
+];
+
+const container=document.getElementById('posts');
+
+posts.forEach((p,i)=>{
+  const div=document.createElement('div');
+  div.className='post';
+
+  const reactionsHTML = emojis.map((e,j)=>`
+    <div class="reaction" onclick="react(${i},${j},this)">
+      <span>${e}</span> <span id="count-${i}-${j}">0</span>
+    </div>
+  `).join('');
+
+  div.innerHTML=`
+    <div class="post-header">
+      <img class="avatar" src="${p.avatar}" alt="${p.user}">
+      <div>
+        <div class="author">${p.user} ${p.dev ? '<span class="dev-badge">DEV</span>' : ''}</div>
+        <div class="time">${p.time}</div>
+      </div>
+    </div>
+    <div class="post-content">${p.content}</div>
+    <div class="reactions">${reactionsHTML}</div>
+    <div class="comments">
+      <div class="comment-input">
+        <input type="text" id="input-${i}" placeholder="Write a comment...">
+        <button onclick="addComment(${i})">Post</button>
+      </div>
+    </div>
+  `;
+  container.appendChild(div);
+});
+
+function react(postIndex,emojiIndex,el){
+  const countEl=document.getElementById(`count-${postIndex}-${emojiIndex}`);
+  let val=parseInt(countEl.textContent);
+  countEl.textContent=val+1;
+  el.style.transform='scale(1.25)';
+  setTimeout(()=>el.style.transform='scale(1)',150);
+}
+
+function addComment(index){
+  const input=document.getElementById(`input-${index}`);
+  const val=input.value.trim();
+  if(!val) return;
+  const comment=document.createElement('div');
+  comment.className='comment';
+  comment.innerHTML=`<strong>You:</strong> ${val}`;
+  document.querySelectorAll('.comments')[index].appendChild(comment);
+  input.value='';
+}
+</script>
+</body>
+</html>

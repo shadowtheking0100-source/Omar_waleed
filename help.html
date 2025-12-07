@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Legend Studios</title>
+<style>
+  :root{--bg1:#6dd5ed;--bg2:#2193b0;--panel:#ffffffee}
+  *{box-sizing:border-box}
+  body{margin:0;height:100vh;padding:30px;font-family:Inter,system-ui;
+    background:radial-gradient(circle at var(--x,50%) var(--y,50%),var(--bg1),var(--bg2));
+    transition:background .12s linear;color:#222;}
+  header{display:flex;justify-content:space-between;align-items:center;color:#fff;font-weight:700}
+  a{color:#fff;text-decoration:none;font-weight:600}
+  main{
+    background:var(--panel);border-radius:12px;padding:24px;
+    max-width:700px;margin:130px auto;box-shadow:0 8px 25px rgba(0,0,0,0.1);
+  }
+  h2{margin-top:0;color:#1e293b}
+  details{margin-top:14px}
+  summary{cursor:pointer;font-weight:600;color:#1e293b}
+  summary:hover{color:#0d9488}
+  p{margin-left:12px;margin-top:6px;color:#334155}
+</style>
+</head>
+<body>
+<header>
+  <div>Legend Studios</div>
+  <a href="Home.html">🏠 Home</a>
+</header>
+
+<main>
+  <h2>Help Center</h2>
+  <details open>
+    <summary>How do I reset my password?</summary>
+    <p>Go to the login page and click “Forgot Password.” Follow the email instructions.</p>
+  </details>
+  <details>
+    <summary>Where can I find Legend sutdios games?</summary>
+    <p>In the games category.</p>
+  </details>
+  <details>
+    <summary>How can I contact support?</summary>
+    <p>Visit our Support page or join our discord server.</p>
+  </details>
+</main>
+
+<script>
+document.body.addEventListener('mousemove', e=>{
+  const x=(e.clientX/window.innerWidth)*100;
+  const y=(e.clientY/window.innerHeight)*100;
+  document.body.style.setProperty('--x',`${x}%`);
+  document.body.style.setProperty('--y',`${y}%`);
+});
+</script>
+</body>
+</html>

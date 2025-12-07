@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Legend.Co</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), #6dd5ed, #2193b0);
+      transition: background 0.1s ease;
+    }
+
+    .text {
+      position: absolute;
+      top: 5%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 3em;
+      font-weight: bold;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+      pointer-events: none;
+    }
+
+    .boxes {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .box {
+      width: 220px;
+      height: 260px;
+      background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 1.1em;
+      color: #2c3e50;
+      opacity: 0;
+      animation: bouncePop 0.8s ease-out forwards;
+      animation-fill-mode: forwards;
+      padding: 10px;
+    }
+
+    .box img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+
+    .box:nth-child(1) { animation-delay: 0.2s; }
+    .box:nth-child(2) { animation-delay: 0.6s; }
+    .box:nth-child(3) { animation-delay: 1s; }
+
+    .box:hover {
+      transform: scale(1.1);
+      transition: transform 0.2s ease;
+      filter: brightness(1.05);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.35);
+      cursor: pointer;
+    }
+
+    @keyframes bouncePop {
+      0%   { transform: scale(0.5); opacity: 0; }
+      50%  { transform: scale(1.2); opacity: 1; }
+      70%  { transform: scale(0.9); }
+      85%  { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <h3 class="text">About Legend.Co</h3>
+
+  <div class="boxes">
+    <div class="box">
+      <br>
+      <br>
+      (i wont tell my real name i changed it)
+      <br>
+      <img src="coding.png" alt="icon">
+      <br>
+      <p> dev name:(shadow)</p>
+    </div>
+    <div class="box">
+        <br>
+        <br>
+      <img src="web-development.png" alt="icon">
+      <br>
+    <p>languages:(html,css,python)</p>
+    </div>
+    <div class="box">
+      <br>
+      <br>
+      <img src="data-management.png" alt="icon">
+      <p>Hobbies:(exploring technology,game development)</p>
+    </div>
+    
+
+  <!-- Sound -->
+  <audio id="soundEffect" src="https://cdn.pixabay.com/audio/2022/03/15/audio_0f6b5ec1b7.mp3" preload="auto"></audio>
+
+  <script>
+    document.body.addEventListener("mousemove", (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      document.body.style.setProperty("--x", `${x}%`);
+      document.body.style.setProperty("--y", `${y}%`);
+    });
+
+    const sound = document.getElementById("soundEffect");
+    const boxes = document.querySelectorAll(".box");
+    let audioEnabled = false;
+
+    function enableAudio() {
+      audioEnabled = true;
+      document.removeEventListener("click", enableAudio);
+    }
+
+    document.addEventListener("click", enableAudio);
+
+    boxes.forEach(box => {
+      box.addEventListener("click", () => {
+        sound.currentTime = 0;
+        sound.play();
+      });
+
+      box.addEventListener("mouseenter", () => {
+        if (audioEnabled) {
+          sound.currentTime = 0;
+          sound.play();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Legend Studios</title>
+<style>
+  :root {
+    --bg1:#6dd5ed;
+    --bg2:#2193b0;
+    --panel:#ffffffee;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:30px;
+    font-family:Inter,system-ui,Segoe UI,Roboto;
+    background:radial-gradient(circle at var(--x,50%) var(--y,50%),var(--bg1),var(--bg2));
+    transition:background .12s linear;
+    color:#222;
+    min-height:100vh;
+  }
+
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:#fff;
+    font-weight:700;
+    font-size:1.1rem;
+  }
+  a{color:#fff;text-decoration:none;font-weight:600;transition:opacity .2s;}
+  a:hover{opacity:0.8;}
+
+  main{
+    background:var(--panel);
+    border-radius:18px;
+    padding:50px;
+    max-width:1000px;
+    margin:60px auto;
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
+    text-align:center;
+    animation:fadeUp .8s ease both;
+  }
+
+  @keyframes fadeUp {
+    from{opacity:0;transform:translateY(25px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  h2{margin-top:0;color:#1e293b;font-size:2rem;}
+  p.subtitle{color:#475569;margin-bottom:25px;font-size:1rem;}
+
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+    margin-top:20px;
+  }
+
+  .contact-card{
+    background:#f9fafc;
+    border-radius:14px;
+    padding:22px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+  }
+  .contact-card:hover{
+    transform:scale(1.06);
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    filter:brightness(1.05);
+  }
+
+  .contact-card img{
+    width:70px;
+    height:70px;
+    margin-bottom:12px;
+  }
+
+  .contact-card h3{
+    margin:5px 0;
+    color:#0f172a;
+    font-size:1.15rem;
+  }
+
+  .contact-card a{
+    display:inline-block;
+    margin-top:8px;
+    color:#2193b0;
+    font-weight:600;
+    text-decoration:none;
+    transition:color .2s;
+  }
+  .contact-card a:hover{
+    color:#0d4d66;
+  }
+
+  footer{
+    margin-top:40px;
+    color:#fff;
+    text-align:center;
+    font-size:0.9rem;
+    opacity:0.9;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div>Legend Studios</div>
+  <a href="Home.html">🏠 Home</a>
+</header>
+
+<main>
+  <h2>Join legend studios socials</h2>
+  <p class="subtitle">We’d love to hear from you! Reach us on your favorite platform below.</p>
+
+  <div class="contact-grid">
+
+    <div class="contact-card" data-link="https://discord.com/">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord">
+      <h3>Discord</h3>
+      <a href="https://discord.com/" target="_blank">Join Our Server</a>
+    </div>
+
+    <div class="contact-card" data-link="https://web.whatsapp.com/">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+      <h3>WhatsApp</h3>
+      <a href="https://web.whatsapp.com/" target="_blank">Chat With Us</a>
+    </div>
+
+    <div class="contact-card" data-link="https://www.facebook.com/">
+      <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook">
+      <h3>Facebook</h3>
+      <a href="https://www.facebook.com/" target="_blank">Follow Us</a>
+    </div>
+
+    <div class="contact-card" data-link="mailto:legendstudios@support.com">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email">
+      <h3>Email</h3>
+      <a href="mailto:legendstudios@support.com">legendstudios@support.com</a>
+    </div>
+
+    <div class="contact-card" data-link="https://www.youtube.com/">
+      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+      <h3>YouTube</h3>
+      <a href="https://www.youtube.com/" target="_blank">Subscribe Now</a>
+    </div>
+
+    <div class="contact-card" data-link="https://www.instagram.com/">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+      <h3>Instagram</h3>
+      <a href="https://www.instagram.com/" target="_blank">Follow Us</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>© 2025 Legend Studios — All Rights Reserved</footer>
+
+<audio id="hoverSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_0f6b5ec1b7.mp3" preload="auto"></audio>
+
+<script>
+  // Background movement
+  document.body.addEventListener("mousemove", (e) => {
+    const x = (e.clientX / window.innerWidth) * 100;
+    const y = (e.clientY / window.innerHeight) * 100;
+    document.body.style.setProperty("--x", `${x}%`);
+    document.body.style.setProperty("--y", `${y}%`);
+  });
+
+  // Hover sound
+  const sound = document.getElementById("hoverSound");
+  let audioEnabled = false;
+  document.addEventListener("click", () => audioEnabled = true);
+
+  const cards = document.querySelectorAll(".contact-card");
+  cards.forEach(card=>{
+    card.addEventListener("mouseenter",()=>{
+      if(audioEnabled){
+        sound.currentTime=0;
+        sound.play();
+      }
+    });
+    card.addEventListener("click",()=>{
+      const link=card.getAttribute("data-link");
+      window.open(link,"_blank");
+    });
+  });
+</script>
+</body>
+</html>

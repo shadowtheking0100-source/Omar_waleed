@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Legend Studios</title>
+<style>
+  :root {
+    --bg1:#6dd5ed;
+    --bg2:#2193b0;
+    --panel:#ffffffee;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    height:100vh;
+    padding:30px;
+    font-family:Inter,system-ui,Segoe UI,Roboto;
+    background:radial-gradient(circle at var(--x,50%) var(--y,50%),var(--bg1),var(--bg2));
+    transition:background .12s linear;
+    color:#222;
+  }
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:#fff;
+    font-weight:700;
+  }
+  a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+  }
+  main{
+    background:var(--panel);
+    border-radius:16px;
+    padding:32px;
+    max-width:850px;
+    margin:60px auto;
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
+  }
+  h2{margin-top:0;color:#1e293b;text-align:center;}
+  .event{
+    background:#f8fafc;
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:20px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.08);
+    transition:transform 0.15s ease, box-shadow 0.2s ease;
+  }
+  .event:hover{transform:scale(1.02);box-shadow:0 10px 25px rgba(0,0,0,0.12);}
+  .event-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .event-date{font-size:.9rem;color:#475569;}
+  .event-content{color:#334155;line-height:1.5;margin-top:6px;}
+  .join-btn{
+    background:#2193b0;
+    color:#fff;
+    border:none;
+    padding:8px 16px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    transition:background .2s,transform .2s;
+  }
+  .join-btn:hover{background:#19718e;transform:scale(1.05);}
+  .joined-count{font-size:.9rem;color:#475569;margin-top:6px;}
+  .reactions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:12px;
+  }
+  .reaction{
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:20px;
+    padding:6px 12px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    cursor:pointer;
+    font-size:1rem;
+    transition:transform .2s;
+    box-shadow:0 2px 6px rgba(0,0,0,0.05);
+  }
+  .reaction:hover{transform:scale(1.15);}
+  .comments{
+    margin-top:15px;
+    padding-top:10px;
+    border-top:1px solid #e2e8f0;
+  }
+  .comment{
+    background:#fff;
+    border-radius:8px;
+    padding:8px 10px;
+    margin-top:10px;
+    color:#334155;
+    box-shadow:0 3px 8px rgba(0,0,0,0.05);
+  }
+  .comment-input{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+  }
+  .comment-input input{
+    flex:1;
+    padding:8px;
+    border-radius:8px;
+    border:1px solid #cbd5e1;
+  }
+  .comment-input button{
+    background:#2193b0;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:8px 12px;
+    cursor:pointer;
+    font-weight:600;
+  }
+  footer{text-align:center;color:#e2f5ff;margin-top:40px;font-size:.9rem;}
+</style>
+</head>
+<body>
+<header>
+  <div>Legend Studios</div>
+  <a href="Home.html">🏠 Home</a>
+</header>
+
+<main>
+  <h2>🎮 Upcoming Events</h2>
+  <p style="text-align:center;color:#475569;margin-bottom:30px">
+    Join community events, react to updates, and leave your thoughts!
+  </p>
+  <div id="events"></div>
+</main>
+
+<footer>© 2025 Legend Studios — Events Zone</footer>
+
+<script>
+document.body.addEventListener('mousemove', e=>{
+  const x=(e.clientX/window.innerWidth)*100;
+  const y=(e.clientY/window.innerHeight)*100;
+  document.body.style.setProperty('--x',`${x}%`);
+  document.body.style.setProperty('--y',`${y}%`);
+});
+
+const emojis = ['👍','🔥','😂','😢','❤️','😡','🤯','👏','💀','⭐'];
+const events = [
+  {
+    title:'🎉 Grand Game Release Party',
+    date:'Oct 20, 2025',
+    desc:'Celebrate the official release of our newest game! Exclusive giveaways and early access for attendees.',
+    joined:64
+  },
+  {
+    title:'🧩 Bug Fix Marathon',
+    date:'Nov 1, 2025',
+    desc:'Join the dev team live as they tackle community-reported bugs and polish the gameplay.',
+    joined:29
+  },
+  {
+    title:'⚔️ PvP Tournament',
+    date:'Nov 10, 2025',
+    desc:'Compete in our first official PvP tournament and prove your skill among the legends.',
+    joined:47
+  },
+  {
+    title:'💬 Dev Q&A Session',
+    date:'Nov 22, 2025',
+    desc:'Ask the developers anything about the next update and the future of Legend Studios.',
+    joined:35
+  },
+  {
+    title:'🎁 Winter Fest Event',
+    date:'Dec 15, 2025',
+    desc:'A fun festive event full of surprises, rewards, and limited-time challenges!',
+    joined:52
+  }
+];
+
+const container=document.getElementById('events');
+events.forEach((ev,i)=>{
+  const div=document.createElement('div');
+  div.className='event';
+
+  const reactionsHTML=emojis.map((e,j)=>`
+    <div class="reaction" onclick="react(${i},${j},this)">
+      <span>${e}</span> <span id="count-${i}-${j}">0</span>
+    </div>
+  `).join('');
+
+  div.innerHTML=`
+    <div class="event-header">
+      <h3>${ev.title}</h3>
+      <div class="event-date">${ev.date}</div>
+    </div>
+    <div class="event-content">${ev.desc}</div>
+    <button class="join-btn" onclick="joinEvent(${i},this)">Join Event</button>
+    <div class="joined-count" id="joined-${i}">${ev.joined} people joined</div>
+    <div class="reactions">${reactionsHTML}</div>
+    <div class="comments">
+      <div class="comment-input">
+        <input type="text" id="input-${i}" placeholder="Write a comment...">
+        <button onclick="addComment(${i})">Post</button>
+      </div>
+    </div>
+  `;
+  container.appendChild(div);
+});
+
+function react(eventIndex,emojiIndex,el){
+  const countEl=document.getElementById(`count-${eventIndex}-${emojiIndex}`);
+  let val=parseInt(countEl.textContent);
+  countEl.textContent=val+1;
+  el.style.transform='scale(1.25)';
+  setTimeout(()=>el.style.transform='scale(1)',150);
+}
+
+function joinEvent(index,btn){
+  const countEl=document.getElementById(`joined-${index}`);
+  const val=parseInt(countEl.textContent);
+  const newVal=val+1;
+  countEl.textContent=`${newVal} people joined`;
+  btn.disabled=true;
+  btn.innerText='✅ Joined';
+  btn.style.background='#16a34a';
+}
+
+function addComment(index){
+  const input=document.getElementById(`input-${index}`);
+  const val=input.value.trim();
+  if(!val) return;
+  const comment=document.createElement('div');
+  comment.className='comment';
+  comment.innerHTML=`<strong>You:</strong> ${val}`;
+  document.querySelectorAll('.comments')[index].appendChild(comment);
+  input.value='';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Legend Studios</title>
+<style>
+  :root{
+    --bg1:#6dd5ed;
+    --bg2:#2193b0;
+    --panel:#ffffffee;
+    --accent:#2193b0;
+    --accent-hover:#1b7a95;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    height:100vh;
+    font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+    background:radial-gradient(circle at var(--x,50%) var(--y,50%),var(--bg1),var(--bg2));
+    transition:background .12s linear;
+    color:#222;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 40px;
+    color:#fff;
+    font-weight:700;
+    position:absolute;
+    top:0;
+    width:100%;
+  }
+
+  header a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+    background:rgba(255,255,255,0.15);
+    padding:8px 14px;
+    border-radius:10px;
+    transition:background .2s ease;
+  }
+  header a:hover{background:rgba(255,255,255,0.3)}
+
+  main{
+    background:var(--panel);
+    border-radius:18px;
+    padding:40px 50px;
+    width:90%;
+    max-width:700px;
+    margin:100px auto 0;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    transform:translateY(5%);
+    text-align:left;
+  }
+
+  h2{
+    margin-bottom:12px;
+    color:#1e293b;
+    font-size:1.8rem;
+  }
+
+  p.subtitle{
+    color:#64748b;
+    margin-bottom:25px;
+    font-size:1rem;
+  }
+
+  .pref-group{
+    margin-bottom:24px;
+    padding:18px 20px;
+    background:#f8fafc;
+    border-radius:12px;
+    transition:background .3s ease;
+  }
+  .pref-group:hover{
+    background:#f1f5f9;
+  }
+
+  label{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-weight:600;
+    font-size:1rem;
+    color:#334155;
+  }
+
+  input[type=checkbox]{
+    width:20px;
+    height:20px;
+    accent-color:var(--accent);
+    cursor:pointer;
+  }
+
+  select{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    border-radius:10px;
+    border:1px solid #cbd5e1;
+    font-size:1rem;
+    background:#fff;
+    outline:none;
+    transition:border .2s;
+  }
+  select:focus{border-color:var(--accent)}
+
+  button{
+    display:block;
+    width:100%;
+    background:var(--accent);
+    color:#fff;
+    font-weight:700;
+    padding:14px 0;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:1rem;
+    margin-top:25px;
+    transition:transform .2s ease, background .3s ease;
+    box-shadow:0 5px 20px rgba(33,147,176,0.3);
+  }
+  button:hover{
+    background:var(--accent-hover);
+    transform:scale(1.04);
+  }
+
+  footer{
+    text-align:center;
+    color:#e2f5ff;
+    margin-top:40px;
+    font-size:.9rem;
+  }
+
+  /* Add soft appearance animation */
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  main{animation:fadeUp .6s ease forwards}
+</style>
+</head>
+<body>
+<header>
+  <div>Legend Studios</div>
+  <a href="Home.html">🏠 Home</a>
+</header>
+
+<main>
+  <h2>⚙️ Preferences</h2>
+  <p class="subtitle">Customize how your Legend Studios experience looks and feels.</p>
+
+  <div class="pref-group">
+    <label>
+      <span>🌙 Enable Dark Mode</span>
+      <input type="checkbox" id="darkMode">
+    </label>
+  </div>
+
+  <div class="pref-group">
+    <label>
+      <span>🔊 Enable Sound Effects</span>
+      <input type="checkbox" id="sound">
+    </label>
+  </div>
+
+  <div class="pref-group">
+    <label for="lang">🌐 Language</label>
+    <select id="lang">
+      <option>English</option>
+      <option>Arabic</option>
+      <option>French</option>
+      <option>Spanish</option>
+      <option>German</option>
+    </select>
+  </div>
+
+  <button id="save">💾 Save Preferences</button>
+</main>
+
+<footer>© 2025 Legend Studios — All Rights Reserved</footer>
+
+<script>
+  // Animated gradient background
+  document.body.addEventListener('mousemove', e=>{
+    const x=(e.clientX/window.innerWidth)*100;
+    const y=(e.clientY/window.innerHeight)*100;
+    document.body.style.setProperty('--x',`${x}%`);
+    document.body.style.setProperty('--y',`${y}%`);
+  });
+
+  const darkMode = document.getElementById('darkMode');
+  const sound = document.getElementById('sound');
+  const lang = document.getElementById('lang');
+
+  // Load stored preferences
+  const prefs = JSON.parse(localStorage.getItem('legendPrefs') || '{}');
+  darkMode.checked = prefs.darkMode || false;
+  sound.checked = prefs.sound || false;
+  if(prefs.lang) lang.value = prefs.lang;
+
+  document.getElementById('save').onclick=()=>{
+    const updated = {
+      darkMode: darkMode.checked,
+      sound: sound.checked,
+      lang: lang.value
+    };
+    localStorage.setItem('legendPrefs', JSON.stringify(updated));
+    alert('✅ Preferences saved successfully!');
+  };
+</script>
+</body>
+</html>

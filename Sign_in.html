@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Legend studios</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), #a18cd1, #fac2ea);
+      transition: background 0.1s ease;
+      font-family: sans-serif;
+    }
+    
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .center-text {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 3em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      pointer-events: none;
+    }
+
+    .username, .password {
+      padding: 6px 14px;
+      background: lightskyblue;
+      color:rgb(31, 44, 71);
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: transform 0.3s ease , box-shadow 0.3s ease;
+    }
+
+    .username:hover, .password:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+    .checkbox {
+      transform: scale(1.4);
+      margin-right: 5px;
+    }
+
+    .button {
+      padding: 12px 24px;
+      background: lightskyblue;
+      color:rgb(31, 44, 71);
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: transform 0.3s ease , box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+    .box {
+      
+      background-color: whitesmoke;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      width: 300px;
+      transition: transform 0.3s ease , box-shadow 0.3s ease;
+    }
+
+    .box:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+    .welcome {
+      color: rgb(105, 104, 105);
+    }
+    .container {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+
+        .checkbox{
+                padding: 6px 14px;
+                background: lightskyblue;
+                color:rgb(31, 44, 71);
+                border: none;
+                border-radius: 8px;
+                font-size: 16px;
+                transition: transform 0.3s ease , box-shadow 0.3s ease;
+                cursor: pointer;
+            }
+
+            .checkbox:hover{
+                transform: scale(1.6);
+                box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+                border: none;
+            }
+            .age {
+      padding: 6px 14px;
+      background: lightskyblue;
+      color:rgb(31, 44, 71);
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: transform 0.3s ease , box-shadow 0.3s ease;
+      cursor:text;
+    }
+
+    .age:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="center-text"><h5>Hi,Create your new account</h5></div>
+  <br>
+  <div class="container">
+    <div class="box">
+      <form id="loginForm">
+        <center>
+            <b>Enter your birthdate</b>
+            <br>
+            <input type="date" id="email" placeholder="Enter birthdate  here" class="age">
+            <br><br>
+            <b>Email</b>
+        <br>
+        <input type="email" id="email" placeholder="email name here" class="username">
+        <br><br>
+        <b>Password</b>
+        <br>
+        <input type="password" id="password" placeholder="enter password here" class="password">
+        <br><br>
+        <label>
+          <input type="checkbox" class="checkbox"> Remember me
+        </label>
+        <br><br>
+        <a href="file:///E:/omar%20win/html%20and%20css%20files/legend.co/Log_in.html" class="welcome">Have an account? Log_in.</a>
+        <br><br>
+        <button type="submit" class="button">Sign up</button>
+        </center>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.body.addEventListener("mousemove", (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      document.body.style.setProperty("--x", `${x}%`);
+      document.body.style.setProperty("--y", `${y}%`);
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // Stop form from submitting by default
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (email === "" || password === "") {
+        alert("Please enter age , email and password");
+      } else {
+        // Redirect if both fields are filled
+        window.location.href = "file:///E:/omar%20win/html%20and%20css%20files/legend.co/Home.html";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Legend Studios</title>
+<style>
+  :root {--bg1:#6dd5ed;--bg2:#2193b0;--panel:#ffffffee;--accent:#1e88e5;}
+  *{box-sizing:border-box}
+  body{
+    margin:0;padding:30px;
+    font-family:Inter,system-ui,Segoe UI,Roboto;
+    background:radial-gradient(circle at var(--x,50%) var(--y,50%),var(--bg1),var(--bg2));
+    transition:background .12s linear;color:#222;
+  }
+  header{display:flex;justify-content:space-between;align-items:center;color:#fff;font-weight:700}
+  a{color:#fff;text-decoration:none;font-weight:600}
+  main{
+    background:var(--panel);border-radius:16px;padding:40px;
+    max-width:850px;margin:60px auto;box-shadow:0 8px 25px rgba(0,0,0,0.15);
+    animation:fadeUp .7s ease both;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:translateY(0);}}
+  .hero{width:100%;border-radius:14px;object-fit:cover;max-height:320px;}
+  h2{margin:20px 0 10px;color:#1e293b;font-size:1.8rem;text-align:center;}
+  .info{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;margin-bottom:15px;}
+  .tag{background:#e0f2fe;color:#0369a1;padding:5px 10px;border-radius:6px;font-size:0.9rem;}
+  .desc{color:#334155;margin:15px 0;text-align:center;line-height:1.6;}
+  .buttons{display:flex;justify-content:center;gap:15px;margin-top:20px;}
+  button{
+    background:var(--accent);
+    color:white;border:none;padding:10px 20px;
+    border-radius:8px;cursor:pointer;
+    font-size:1rem;font-weight:600;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  button:hover{transform:scale(1.05);box-shadow:0 6px 14px rgba(0,0,0,0.2);}
+</style>
+</head>
+<body>
+<header>
+  <div>Legend Studios</div>
+  <a href="GameLibraries.html">⬅ Back</a>
+</header>
+
+<main id="details"></main>
+
+<script>
+  // Background movement
+  document.body.addEventListener('mousemove', e=>{
+    const x=(e.clientX/window.innerWidth)*100;
+    const y=(e.clientY/window.innerHeight)*100;
+    document.body.style.setProperty('--x',`${x}%`);
+    document.body.style.setProperty('--y',`${y}%`);
+  });
+
+  // Load game
+  const g = JSON.parse(localStorage.getItem('selectedGame'));
+  const details=document.getElementById('details');
+
+  if(g){
+    details.innerHTML=`
+      <img src="${g.img}" class="hero" alt="${g.name}">
+      <h2>${g.name}</h2>
+      <div class="info">
+        <div class="tag">📅 Release: ${g.release}</div>
+        <div class="tag">🎮 Genre: ${g.genre}</div>
+        <div class="tag">⭐ Rating: ${g.rating}</div>
+      </div>
+      <div class="desc">${g.desc}</div>
+      <div class="buttons">
+        <button onclick="alert('Downloading...')">⇩ Download the game</button>
+        <button onclick="window.open('${g.trailer}','_blank')">🎥 Watch Trailer</button>
+      </div>
+    `;
+  } else {
+    details.innerHTML='<p style="text-align:center;">Game not found. Please go back to the library.</p>';
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Legend Studios</title>
+<style>
+  :root {--bg1:#6dd5ed;--bg2:#2193b0;--panel:#ffffffee;}
+  * {box-sizing:border-box;}
+  body {
+    margin:0; height:100vh; padding:30px;
+    font-family:Inter,system-ui,Segoe UI,Roboto;
+    background:radial-gradient(circle at var(--x,50%) var(--y,50%),var(--bg1),var(--bg2));
+    color:#222; transition:background .12s linear; overflow-y:auto;
+  }
+
+  header {
+    display:flex; justify-content:space-between; align-items:center;
+    color:#fff; font-weight:700;
+  }
+  a {color:#fff; text-decoration:none; font-weight:600;}
+
+  main {
+    background:var(--panel); border-radius:16px;
+    padding:32px; max-width:900px; margin:50px auto;
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  section {
+    background:#f8fafc; border-radius:12px; padding:20px;
+    margin-bottom:24px; box-shadow:0 5px 15px rgba(0,0,0,0.07);
+  }
+
+  h2, h3 {color:#1e293b; margin-top:0;}
+  p {color:#334155; line-height:1.6;}
+  form {display:flex; flex-direction:column; gap:10px;}
+  input, textarea, select {
+    padding:10px; border-radius:8px; border:1px solid #cbd5e1; font-size:1rem;
+  }
+  textarea {resize:vertical; min-height:80px;}
+  button {
+    background:#2193b0; color:#fff; border:none;
+    border-radius:8px; padding:10px 14px; font-weight:600; cursor:pointer;
+    transition:background .2s, transform .15s;
+  }
+  button:hover {background:#19718e; transform:scale(1.03);}
+
+  .faq {border-top:1px solid #e2e8f0; padding-top:10px; margin-top:10px;}
+  .faq-item {margin-bottom:10px;}
+  .faq-item button {
+    background:none; color:#2193b0; border:none; font-weight:600; cursor:pointer;
+    text-align:left; width:100%; font-size:1rem;
+  }
+  .faq-item p {display:none; margin-top:5px; color:#475569;}
+
+  .chat-box {
+    border:1px solid #cbd5e1; border-radius:8px; padding:10px; height:200px;
+    overflow-y:auto; background:#fff; margin-bottom:10px;
+  }
+  .msg {margin:6px 0; padding:6px 10px; border-radius:10px; max-width:80%;}
+  .user {background:#2193b0; color:#fff; margin-left:auto;}
+  .bot {background:#e2e8f0; color:#111827; margin-right:auto;}
+
+  footer {
+    text-align:center; color:#e2f5ff; margin-top:40px; font-size:.9rem;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div>Legend Studios</div>
+  <a href="Home.html">🏠 Home</a>
+</header>
+
+<main>
+  <h2 style="text-align:center;">🆘 Support Center</h2>
+  <p style="text-align:center;color:#475569;">Need help? We're here to assist you in every way possible.</p>
+
+  <!-- Contact -->
+  <section>
+    <h3>💬 Contact Support</h3>
+    <form onsubmit="showMessage('Thanks! Our support team will reach out soon.');return false;">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Write your message..."></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Report -->
+  <section>
+    <h3>🛠️ Report a Bug</h3>
+    <form onsubmit="showMessage('Bug report received! We’ll look into it ASAP.');return false;">
+      <input type="text" placeholder="Game or Feature Name" required>
+      <textarea placeholder="Describe the bug in detail..." required></textarea>
+      <button type="submit">Submit Bug Report</button>
+    </form>
+  </section>
+
+  <!-- Feedback -->
+  <section>
+    <h3>📢 Feedback & Suggestions</h3>
+    <form onsubmit="showMessage('Thank you for your feedback!');return false;">
+      <select>
+        <option>General Feedback</option>
+        <option>New Feature Suggestion</option>
+        <option>Improvement Idea</option>
+      </select>
+      <textarea placeholder="Share your thoughts..."></textarea>
+      <button type="submit">Send Feedback</button>
+    </form>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <h3>💡 FAQs</h3>
+    <div class="faq">
+      <div class="faq-item">
+        <button onclick="toggleFAQ(this)">When will the next game release?</button>
+        <p>Our next major game is planned for early 2026! Stay tuned to the News page for updates.</p>
+      </div>
+      <div class="faq-item">
+        <button onclick="toggleFAQ(this)">How can I reset my account?</button>
+        <p>Go to Settings → Profile → Delete or Reset Data.</p>
+      </div>
+      <div class="faq-item">
+        <button onclick="toggleFAQ(this)">How do I contact developers directly?</button>
+        <p>You can post in the Community page and tag a DEV — they’ll see it!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Help -->
+  <section>
+    <h3>⚙️ Quick Help</h3>
+    <p><a href="community.html"><font color="black">💬 Join the Community</a> to ask other players.</font></p>
+    <p><a href="events.html"><font color="black">🎉 Check Events</a> for current activities.</font></p>
+    <p><a href="news.html"><font color="black">📰 Visit News</a> for latest updates and bug fixes.</font></p>
+  </section>
+
+  <!-- Live Chat Simulation -->
+  <section>
+    <h3>💭 Live Chat</h3>
+    <div class="chat-box" id="chat">
+      <div class="msg bot">👋 Hello! How can I assist you today?</div>
+    </div>
+    <form onsubmit="chatSend();return false;">
+      <input id="chatInput" type="text" placeholder="Type your message..." required>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+</main>
+
+<footer>© 2025 Legend Studios — Support Hub</footer>
+
+<script>
+  // Background motion
+  document.body.addEventListener('mousemove', e=>{
+    const x=(e.clientX/window.innerWidth)*100;
+    const y=(e.clientY/window.innerHeight)*100;
+    document.body.style.setProperty('--x',`${x}%`);
+    document.body.style.setProperty('--y',`${y}%`);
+  });
+
+  function showMessage(msg){
+    alert(msg);
+  }
+
+  function toggleFAQ(btn){
+    const p=btn.nextElementSibling;
+    p.style.display=p.style.display==='block'?'none':'block';
+  }
+
+  // Fake live chat
+  function chatSend(){
+    const input=document.getElementById('chatInput');
+    const chat=document.getElementById('chat');
+    const text=input.value.trim();
+    if(!text) return;
+    chat.innerHTML+=`<div class="msg user">${text}</div>`;
+    input.value='';
+    setTimeout(()=>{
+      chat.innerHTML+=`<div class="msg bot">🤖 Thanks for your message! Our team will get back soon.</div>`;
+      chat.scrollTop=chat.scrollHeight;
+    },1000);
+    chat.scrollTop=chat.scrollHeight;
+  }
+</script>
+</body>
+</html>

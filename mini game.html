@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Legend Studios</title>
+<style>
+  :root {
+    --bg1:#6dd5ed;
+    --bg2:#2193b0;
+    --panel:#ffffffee;
+  }
+
+  * { box-sizing:border-box; }
+
+  body {
+    margin:0;
+    padding:30px;
+    font-family:Inter,system-ui,Segoe UI,Roboto;
+    background:radial-gradient(circle at var(--x,50%) var(--y,50%),var(--bg1),var(--bg2));
+    transition:background .12s linear;
+    color:#222;
+    min-height:100vh;
+  }
+
+  header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:#fff;
+    font-weight:700;
+  }
+
+  a {
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+  }
+
+  main {
+    background:var(--panel);
+    border-radius:16px;
+    padding:32px;
+    max-width:950px;
+    margin:60px auto;
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  h2 { 
+    text-align:center; 
+    color:#1e293b;
+    margin-top:0;
+  }
+
+  p.desc {
+    text-align:center;
+    color:#475569;
+    margin-bottom:30px;
+  }
+
+  .game-box {
+    background:#f8fafc;
+    border-radius:14px;
+    margin-bottom:25px;
+    padding:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+    transition:transform .2s ease, box-shadow .2s ease;
+    position:relative;
+  }
+
+  .game-box:hover {
+    transform:scale(1.02);
+    box-shadow:0 12px 28px rgba(0,0,0,0.15);
+  }
+
+  .game-title {
+    color:#1e293b;
+    font-size:1.4rem;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+
+  .game-desc {
+    color:#475569;
+    font-size:0.95rem;
+    margin-bottom:15px;
+  }
+
+  .iframe-container {
+    position:relative;
+    width:100%;
+    height:450px;
+    border-radius:10px;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  iframe {
+    width:100%;
+    height:100%;
+    border:none;
+    border-radius:10px;
+    display:none;
+  }
+
+  .start-btn {
+    background:#2193b0;
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    padding:12px 24px;
+    font-size:1.1rem;
+    font-weight:700;
+    cursor:pointer;
+    transition:background .2s, transform .2s;
+  }
+
+  .start-btn:hover {
+    background:#19718e;
+    transform:scale(1.05);
+  }
+
+  .controls {
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:12px;
+  }
+
+  .btn {
+    background:#2193b0;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:8px 16px;
+    cursor:pointer;
+    font-weight:600;
+    transition:background .2s, transform .15s;
+  }
+
+  .btn:hover {
+    background:#19718e;
+    transform:scale(1.05);
+  }
+
+  footer {
+    text-align:center;
+    color:#e2f5ff;
+    margin-top:40px;
+    font-size:.9rem;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div>Legend Studios</div>
+  <a href="Home.html">🏠 Home</a>
+</header>
+
+<main>
+  <h2>🎮 Mini Games</h2>
+  <p class="desc">Click “Start Game” to load and play — stop it anytime to save performance!</p>
+  <p class="desc"><strong>Note :</strong>press fullscreen after pressing the start game button<strong> it might glitch the games</strong></p>
+
+  <!-- Game Template -->
+  <div class="game-box">
+    <div class="game-title">highway-traffic</div>
+    <div class="game-desc">drive anywhere , anytime with your car and dont crush into other cars</div>
+    <div class="iframe-container">
+      <iframe id="game1" data-src="https://www.onlinegames.io/games/2022/unity/highway-traffic/index.html" allowfullscreen></iframe>
+      <button class="start-btn" onclick="startGame('game1', this)">▶️ Start Game</button>
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="reloadGame('game1')">🔁 Reload</button>
+      <button class="btn" onclick="stopGame('game1')">⛔ Stop</button>
+      <button class="btn" onclick="fullscreenGame('game1')">🖥️ Fullscreen</button>
+    </div>
+  </div>
+
+  <div class="game-box">
+    <div class="game-title">head-soccer</div>
+    <div class="game-desc">sprint , jump, shoot do ur best to score the best goal!!!</div>
+    <div class="iframe-container">
+      <iframe id="game2" data-src="https://www.onlinegames.io/games/2023/construct/280/head-soccer-2022/index.html" allowfullscreen></iframe>
+      <button class="start-btn" onclick="startGame('game2', this)">▶️ Start Game</button>
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="reloadGame('game2')">🔁 Reload</button>
+      <button class="btn" onclick="stopGame('game2')">⛔ Stop</button>
+      <button class="btn" onclick="fullscreenGame('game2')">🖥️ Fullscreen</button>
+    </div>
+  </div>
+
+  <div class="game-box">
+    <div class="game-title">stack-fire-ball</div>
+    <div class="game-desc">break all stacks but be carful u might break yourself!</div>
+    <div class="iframe-container">
+      <iframe id="game3" data-src="https://www.onlinegames.io/games/2021/unity/stack-fire-ball/index.html" allowfullscreen></iframe>
+      <button class="start-btn" onclick="startGame('game3', this)">▶️ Start Game</button>
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="reloadGame('game3')">🔁 Reload</button>
+      <button class="btn" onclick="stopGame('game3')">⛔ Stop</button>
+      <button class="btn" onclick="fullscreenGame('game3')">🖥️ Fullscreen</button>
+    </div>
+  </div>
+
+  <div class="game-box">
+    <div class="game-title">guerrillas-io</div>
+    <div class="game-desc">High quality shooter game with action vibes.</div>
+    <div class="iframe-container">
+      <iframe id="game4" data-src="https://www.onlinegames.io/games/2023/unity2/guerrillas-io/index.html" allowfullscreen></iframe>
+      <button class="start-btn" onclick="startGame('game4', this)">▶️ Start Game</button>
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="reloadGame('game4')">🔁 Reload</button>
+      <button class="btn" onclick="stopGame('game4')">⛔ Stop</button>
+      <button class="btn" onclick="fullscreenGame('game4')">🖥️ Fullscreen</button>
+    </div>
+  </div>
+
+</main>
+
+<footer>© 2025 Legend Studios — Mini Games Zone</footer>
+
+<script>
+  // moving gradient background
+  document.body.addEventListener('mousemove', e=>{
+    const x=(e.clientX/window.innerWidth)*100;
+    const y=(e.clientY/window.innerHeight)*100;
+    document.body.style.setProperty('--x',`${x}%`);
+    document.body.style.setProperty('--y',`${y}%`);
+  });
+
+  function startGame(id, btn){
+    const iframe=document.getElementById(id);
+    iframe.src=iframe.getAttribute('data-src');
+    iframe.style.display='block';
+    btn.style.display='none';
+  }
+
+  function reloadGame(id){
+    const iframe=document.getElementById(id);
+    if(iframe.src){
+      iframe.src=iframe.src;
+    } else {
+      iframe.src=iframe.getAttribute('data-src');
+      iframe.style.display='block';
+      const startBtn=iframe.parentElement.querySelector('.start-btn');
+      if(startBtn) startBtn.style.display='none';
+    }
+  }
+
+  function stopGame(id){
+    const iframe=document.getElementById(id);
+    iframe.src='';
+    iframe.style.display='none';
+    const startBtn=iframe.parentElement.querySelector('.start-btn');
+    if(startBtn) startBtn.style.display='inline-block';
+  }
+
+  // ✅ Fixed fullscreen
+  function fullscreenGame(id){
+    const iframe=document.getElementById(id);
+    if(iframe.requestFullscreen){
+      iframe.requestFullscreen();
+    }else if(iframe.webkitRequestFullscreen){
+      iframe.webkitRequestFullscreen();
+    }else if(iframe.msRequestFullscreen){
+      iframe.msRequestFullscreen();
+    }
+
+    // Exit fullscreen event
+    document.addEventListener("fullscreenchange", () => {
+      if (!document.fullscreenElement) {
+        iframe.style.display = 'block'; // ensure game reappears properly
+      }
+    });
+  }
+</script>
+</body>
+</html>
